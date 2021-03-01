@@ -9,7 +9,7 @@ spec:
     match:
       resources:
         kinds:
-        - Pod
+        - Deployment
     validate:
       message: "label `app.kubernetes.io/name` is required"
       pattern:
