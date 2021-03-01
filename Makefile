@@ -25,7 +25,13 @@ deploy-gatekeeper:
 
 uninstall-gatekeeper:
 	kubectl delete -f https://raw.githubusercontent.com/open-policy-agent/gatekeeper/${GATEKEEPER_VERSION}/deploy/gatekeeper.yaml
-
+	# Ensure that all the CRD were deleted
+	kubectl delete crd \
+	  configs.config.gatekeeper.sh \
+	  constraintpodstatuses.status.gatekeeper.sh \
+	  constrainttemplatepodstatuses.status.gatekeeper.sh \
+	  constrainttemplates.templates.gatekeeper.sh
+  
 deploy-kyverno:
 	kubectl create -f https://raw.githubusercontent.com/kyverno/kyverno/${KYVERNO_VERSION}/definitions/release/install.yaml
 
