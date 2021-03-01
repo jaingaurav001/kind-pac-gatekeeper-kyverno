@@ -9,7 +9,7 @@ The project demonstrates what OPA Gatekeeper and Kyverno are, and how we can set
 ## Deploy OPA Gatekeeper
 `$ make deploy-gatekeeper`
 
-## Test Gatekeeper
+## Test OPA Gatekeeper
 Create K8sRequiredLabels Custom Resource
 
 `$ kubectl apply -f opa-gatekeeper/k8srequiredlabels-constraint-template.yaml`
@@ -45,7 +45,8 @@ List the created Custom Resource Definitions
 
 `$ kubectl get customresourcedefinitions.apiextensions.k8s.io`
 
-Enforce a required label policy on Pod resource
+## Test OPA Gatekeeper
+Enforce a required label policy on Deployment resource
 
 `$ kubectl apply -f kyverno/requirelabels-clusterpolicy.yaml`
 
@@ -61,5 +62,5 @@ Delete the created deployment
 
 `$ kubectl delete -f kyverno/valid-deployment.yaml`
 
-## Uninstall Gatekeeper
+## Uninstall Kyverno
 `make uninstall-kyverno`
