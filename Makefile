@@ -18,7 +18,7 @@ create-cluster:
 	# Check for existing kind cluster
 	if [ $$(kind get clusters | grep ${CLUSTER_NAME}) ]; then kind delete clusters ${CLUSTER_NAME}; fi
 	# Create a new kind cluster
-	TERM=dumb kind create cluster --name ${CLUSTER_NAME} --image kindest/node:${KUBERNETES_VERSION} --config=resources/kind_config.yaml
+	TERM=dumb kind create cluster --name ${CLUSTER_NAME} --image kindest/node:${KUBERNETES_VERSION} --config=resources/kind-config.yaml
 
 deploy-gatekeeper:
 	kubectl apply -f https://raw.githubusercontent.com/open-policy-agent/gatekeeper/${GATEKEEPER_VERSION}/deploy/gatekeeper.yaml
