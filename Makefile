@@ -31,3 +31,6 @@ deploy-kyverno:
 
 uninstall-kyverno:
 	kubectl delete -f https://raw.githubusercontent.com/kyverno/kyverno/${KYVERNO_VERSION}/definitions/release/install.yaml
+
+delete-cluster:
+	if [ $$(kind get clusters | grep ${CLUSTER_NAME}) ]; then kind delete clusters ${CLUSTER_NAME}; fi
