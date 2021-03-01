@@ -5,11 +5,3 @@ metadata:
   name: invalid-namespace
 spec: {}
 status: {}
-
-opa-gatekeeper/valid-namespace.yaml
-apiVersion: v1
-kind: Namespace
-metadata:
-  name: valid-namespace
-  labels:
-    gatekeeper: test
