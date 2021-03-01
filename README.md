@@ -45,7 +45,7 @@ List the created Custom Resource Definitions
 
 `$ kubectl get customresourcedefinitions.apiextensions.k8s.io`
 
-## Test OPA Gatekeeper
+## Test Kyverno
 Enforce a required label policy on Deployment resource
 
 `$ kubectl apply -f kyverno/requirelabels-clusterpolicy.yaml`
