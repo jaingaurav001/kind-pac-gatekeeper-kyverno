@@ -10,21 +10,31 @@ The project demonstrates what OPA Gatekeeper and Kyverno are, and how we can set
 `$ make deploy-gatekeeper`
 
 ## Test OPA Gatekeeper
-Create K8sRequiredLabels Custom Resource
+ConstraintTemplate describes the Rego that enforces the constraint and the schema of the constraint. The schema constraint allows the author of the constraint (cluster admin) to define the contraint behavior.
+
+In this example, the cluster admin enforce policy to validate required labels that we want to on resources (in our case Namespace resource), if required label exits then request gets approve, if not it'll get rejected.
+
+Create the ConstraintTemplate
 
 `$ kubectl apply -f opa-gatekeeper/k8srequiredlabels-constraint-template.yaml`
 
-Verify that the K8sRequiredLabels CR is created
+Build Constraint
+The cluster admin will use the constraint to inform the OPA Gatekeeper to enforce the policy. For our example, as cluster admin we want to enforce that all the created Namespace resource should have gatekepeer label.
 
-`$ kubectl get customresourcedefinitions.apiextensions.k8s.io`
-
-Using K8sRequiredLabels CR, define policy context i.e. which resources we want to apply the policy on
+Create the Constraint
 
 `$ kubectl apply -f opa-gatekeeper/k8srequiredlabels-constraint.yaml`
+
+Verify that the CRD constraint and constrainttemplate were created
+
+`$ kubectl get constraint
+$ kubectl get constrainttemplate`
 
 Test by creating a invalid namespace
 
 `$ kubectl apply -f opa-gatekeeper/invalid-namespace.yaml`
+
+The request was denied by kubernetes API, because it didn’t meet the requirement from the constraint forced by OPA Gatekeeper.
 
 Test by creating a valid namespace
 
